@@ -1234,6 +1234,7 @@ app.include_router(
     evaluations.router, prefix="/api/v1/evaluations", tags=["evaluations"]
 )
 app.include_router(utils.router, prefix="/api/v1/utils", tags=["utils"])
+app.include_router(flashcards.router, prefix="/api/v1/flashcards", tags=["flashcards"])
 
 # SCIM 2.0 API for identity management
 if SCIM_ENABLED:

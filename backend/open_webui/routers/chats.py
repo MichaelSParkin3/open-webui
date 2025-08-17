@@ -13,6 +13,7 @@ from open_webui.models.chats import (
 )
 from open_webui.models.tags import TagModel, Tags
 from open_webui.models.folders import Folders
+from open_webui.models.flashcards import FlashcardForm, Flashcards
 
 from open_webui.config import ENABLE_ADMIN_CHAT_ACCESS, ENABLE_ADMIN_EXPORT
 from open_webui.constants import ERROR_MESSAGES
@@ -889,3 +890,23 @@ async def delete_all_tags_by_id(id: str, user=Depends(get_verified_user)):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail=ERROR_MESSAGES.NOT_FOUND
         )
+
+
+class LessonPlanForm(BaseModel):
+    time_length: str
+    options: list[str]
+
+
+@router.post("/lesson-plan/new", response_model=Optional[ChatResponse])
+async def new_lesson_plan(
+    form_data: LessonPlanForm, user=Depends(get_verified_user)
+):
+    try:
+        chat = Chats.generate_lesson_plan(user.id, form_data)
+        return ChatResponse(**chat.model_dump())
+    except Exception as e:
+        log.exception(e)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=ERROR_MESSAGES.DEFAULT()
+        )
+

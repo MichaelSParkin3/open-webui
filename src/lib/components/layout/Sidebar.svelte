@@ -822,6 +822,36 @@
 				{/if}
 			</div>
 
+			<div class="px-[7px] flex justify-center text-gray-800 dark:text-gray-200">
+				<a
+					class="grow flex items-center space-x-3 rounded-lg px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-900 transition"
+					href="/spanish"
+					on:click={itemClickHandler}
+					draggable="false"
+				>
+					<div class="self-center">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							class="size-4.5"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M10.5 21l5.25-11.25L21 21m-9-3.75h.008v.008H10.5v-.008z"
+							/>
+						</svg>
+					</div>
+
+					<div class="flex self-center translate-y-[0.5px]">
+						<div class=" self-center text-sm font-primary">{$i18n.t('Spanish')}</div>
+					</div>
+				</a>
+			</div>
+
 			<div class="relative flex flex-col flex-1">
 				{#if ($models ?? []).length > 0 && ($settings?.pinnedModels ?? []).length > 0}
 					<PinnedModelList bind:selectedChatId {shiftKey} />

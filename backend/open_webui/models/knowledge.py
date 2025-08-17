@@ -219,3 +219,76 @@ class KnowledgeTable:
 
 
 Knowledges = KnowledgeTable()
+
+
+####################
+# Spanish Knowledge DB Schema
+####################
+
+
+class SpanishKnowledge(Base):
+    __tablename__ = "spanish_knowledge"
+
+    id = Column(Text, unique=True, primary_key=True)
+    user_id = Column(Text)
+
+    name = Column(Text)
+    description = Column(Text)
+
+    data = Column(JSON, nullable=True)
+    meta = Column(JSON, nullable=True)
+
+    access_control = Column(JSON, nullable=True)
+
+    created_at = Column(BigInteger)
+    updated_at = Column(BigInteger)
+
+
+class SpanishKnowledgeModel(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: str
+    user_id: str
+
+    name: str
+    description: str
+
+    data: Optional[dict] = None
+    meta: Optional[dict] = None
+
+    access_control: Optional[dict] = None
+
+    created_at: int  # timestamp in epoch
+    updated_at: int  # timestamp in epoch
+
+
+class SpanishKnowledgeTable:
+    def insert_new_spanish_knowledge(
+        self, user_id: str, form_data: KnowledgeForm
+    ) -> Optional[SpanishKnowledgeModel]:
+        with get_db() as db:
+            knowledge = SpanishKnowledgeModel(
+                **{
+                    **form_data.model_dump(),
+                    "id": str(uuid.uuid4()),
+                    "user_id": user_id,
+                    "created_at": int(time.time()),
+                    "updated_at": int(time.time()),
+                }
+            )
+
+            try:
+                result = SpanishKnowledge(**knowledge.model_dump())
+                db.add(result)
+                db.commit()
+                db.refresh(result)
+                if result:
+                    return SpanishKnowledgeModel.model_validate(result)
+                else:
+                    return None
+            except Exception:
+                return None
+
+
+SpanishKnowledges = SpanishKnowledgeTable()
+

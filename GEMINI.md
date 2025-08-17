@@ -125,3 +125,31 @@ Open WebUI can be deployed to Kubernetes using Kustomize or Helm.
     *   `npm run i18n:parse`
 *   **Extensibility:** The architecture supports plugins and pipelines, allowing for custom logic and integrations.
 *   **Continuous Integration/Continuous Deployment (CI/CD):** GitHub Actions workflows are used for automated builds, linting, and deployments.
+
+## Engineering Guidelines (MCPs)
+
+**Git Commit Guidelines**
+
+* Use Conventional Commits formatting.
+* Use a prefix-based branch naming convention.
+* Do **not** add the model as a co-author or include links to Claude Code.
+
+**Visual Development Memories**
+
+* Use the **Playwright MCP server** when making visual/front-end changes to check your work.
+
+**Guidance Memories**
+
+* Ask for clarification *up front* when the initial prompt lacks direction.
+
+**Linting & Code Quality**
+
+* Run `npm run lint` after large additions/refactors to maintain best practices.
+
+**CLI Tooling Memories**
+
+* Use the `gh` CLI where appropriate to create issues, open PRs, read comments, etc.
+
+**Documentation Memories**
+
+* Use **context7** to find relevant, up-to-date docs when working with third-party libraries, packages, or frameworks.

@@ -50,6 +50,12 @@
 			label: $i18n.t('Explain'),
 			icon: LightBulb,
 			prompt: `{{SELECTED_CONTENT}}\n\n\n${$i18n.t('Explain')}`
+		},
+		{
+			id: 'add-to-flashcards',
+			label: $i18n.t('Add to Flashcards'),
+			icon: null, // Add an icon here
+			prompt: `{{SELECTED_CONTENT}}`
 		}
 	];
 
@@ -69,6 +75,12 @@
 	const actionHandler = async (actionId) => {
 		if (!model) {
 			toast.error('Model not selected');
+			return;
+		}
+
+		if (actionId === 'add-to-flashcards') {
+			// This is a placeholder for the add to flashcards functionality
+			toast.success('Added to flashcards!');
 			return;
 		}
 

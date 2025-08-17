@@ -1948,6 +1948,41 @@ async def process_web_search(
             detail=ERROR_MESSAGES.WEB_SEARCH_ERROR(e),
         )
 
+
+@router.post("/spanish/update")
+def update_spanish_knowledge_base(
+    request: Request,
+    form_data: dict,
+    user=Depends(get_verified_user),
+):
+    try:
+        collection_name = "spanish_knowledge_base"
+
+        # Extract the content from the chat messages
+        content = "\n".join([message["content"] for message in form_data["messages"]])
+
+        docs = [
+            Document(
+                page_content=content,
+                metadata={
+                    "name": "Spanish Knowledge Base",
+                    "created_by": user.id,
+                },
+            )
+        ]
+
+        save_docs_to_vector_db(
+            request, docs, collection_name, overwrite=False, add=True, user=user
+        )
+
+        return {"status": True}
+    except Exception as e:
+        log.exception(e)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=ERROR_MESSAGES.DEFAULT(e),
+        )
+
     try:
         if request.app.state.config.BYPASS_WEB_SEARCH_WEB_LOADER:
             search_results = [

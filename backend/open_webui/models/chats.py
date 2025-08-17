@@ -1021,3 +1021,61 @@ class ChatTable:
 
 
 Chats = ChatTable()
+
+    def generate_lesson_plan(self, user_id: str, form_data) -> Optional[ChatModel]:
+        # This is a placeholder function. In a real implementation, this function
+        # would use an LLM to generate a lesson plan based on the user's preferences.
+        # For now, it just creates a new chat with a dummy lesson plan.
+
+        # Create a dummy lesson plan
+        lesson_plan = {
+            "title": "My Spanish Lesson Plan",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": f"Create a {form_data.time_length} lesson plan with the following options: {', '.join(form_data.options)}",
+                },
+                {
+                    "role": "assistant",
+                    "content": "Here is your lesson plan:",
+                },
+            ],
+        }
+
+        # Create a new chat with the lesson plan
+        chat_form = ChatForm(
+            chat=lesson_plan,
+            folder_id=None,
+        )
+
+        return self.insert_new_chat(user_id, chat_form)
+
+    def class_chat(self, user_id: str, form_data) -> Optional[ChatModel]:
+        # This is a placeholder function. In a real implementation, this function
+        # would use an LLM to generate a response based on the user's message
+        # and the current lesson plan.
+        # For now, it just creates a new chat with a dummy response.
+
+        # Create a dummy response
+        response = {
+            "title": "Class Chat",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": form_data.content,
+                },
+                {
+                    "role": "assistant",
+                    "content": "This is a dummy response from the class chat.",
+                },
+            ],
+        }
+
+        # Create a new chat with the response
+        chat_form = ChatForm(
+            chat=response,
+            folder_id=None,
+        )
+
+        return self.insert_new_chat(user_id, chat_form)
+

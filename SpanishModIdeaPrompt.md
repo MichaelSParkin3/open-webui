@@ -1,4 +1,16 @@
-I'm thinking I'll tailor it for Argentine spanish first for proof of concept. So lets come up with a feature branch by feature branch or PR by PR organization plan for this idea. I will be turning this into a SpanishMode.md file to guide gemini CLI coding tool to code this.
+Make a detailed plan to accomplish this. Think hardest.
+
+How will we implement only the functionality we need right now?
+Identify files that need to be changed.
+Do not include plans for legacy fallback unless required or explicitly requested.
+
+Write a short overview of what you are about to do.
+Write function names and 1–3 sentences about what they do.
+Write test names and 5–10 words about behavior to cover.
+
+---
+
+I'm thinking I'll tailor it for Argentine spanish first for proof of concept. So lets come up with a feature branch by feature branch or PR by PR organization plan for this idea. I will be turning this into a SpanishMode.md file to guide gemini CLI coding tool to code this. Keep in mind Open Webui is a platform to use llm's saved vector databases, embeddings, etc. we will make use of this exisitng functionality for our new features.
 
 I want the below functionality:
 - A Spanish Learning Tab above the Chats tab. Everything inside the Spanish Tab chats, etc. should be added to a Spanish Knowledge base. With a button to update knowledge base when you want to. The button adds everything to the knowledge base that hasn't already been added. If one of the chats (that had been previously added to the knowledge base) has new messages in it then add the new messages.
